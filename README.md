@@ -1,71 +1,104 @@
-# Breast-Cancer-Risk-PredictionProject Overview
 
-This project uses machine learning to predict breast cancer risk based on polygenic risk score (PRS) features. The goal was to develop and evaluate a classification model using genomic risk data.
+# Breast Cancer Risk Prediction Using Polygenic Risk Scores
 
-Dataset
+## Overview
 
-The dataset was provided through a Kaggle breast cancer risk prediction competition.
+This project focuses on predicting breast cancer risk using polygenic risk scores (PRS) and machine learning. The goal was to develop a classification model that could predict breast cancer status based on genomic risk features.
 
-Training samples: 18,702
+The project was completed as part of a bioinformatics machine learning competition on Kaggle.
 
-Test samples: 10,520
+## Dataset
 
-Features: 5,460 PRS Z-score features and predicted ancestry
+The dataset was provided through the Breast Cancer Risk Prediction Kaggle competition.
 
-Target variable: Breast cancer status
+- **Training samples:** 18,702
+- **Test samples:** 10,520
+- **PRS features:** 5,460
+- **Additional feature:** Predicted ancestry
+- **Target variable:** `breast_cancer`
 
-Methods
+The original competition datasets are not included in this repository.
 
-Used Python and scikit-learn to build a logistic regression classification model.
+## Methods
 
-Applied feature standardization using StandardScaler.
+The model was developed using Python and scikit-learn.
 
-Used one-hot encoding for predicted ancestry.
+### Data Preprocessing
+- Standardized numerical PRS features using `StandardScaler`.
+- Encoded the categorical ancestry feature using `OneHotEncoder`.
+- Used a preprocessing pipeline to apply transformations consistently.
 
-Evaluated regularization strengths to improve model performance.
+### Model Development
+- Trained a logistic regression classifier.
+- Tested different regularization strengths (`C` values).
+- Used stratified cross-validation to evaluate model performance.
+- Generated predicted probabilities for the test dataset.
 
-Performed cross-validation to evaluate model performance.
+### Model Evaluation
+- Evaluated predictions using ROC-AUC (Area Under the Receiver Operating Characteristic Curve).
+- Compared different regularization strengths to identify a suitable model configuration.
 
-Used area under the ROC curve (ROC-AUC) as the evaluation metric.
+## Results
 
-Results
+The best mean ROC-AUC from the 3-fold cross-validation experiments was:
 
-Best mean 3-fold cross-validation AUC: 0.73431
+| Model | Regularization (C) | Mean CV ROC-AUC |
+|-------|--------------------|----------------|
+| Logistic Regression | 0.0003 | 0.73431 |
 
-Selected regularization parameter in that experiment: C = 0.0003
+The competition baseline AUC was 0.70965.
 
-Competition baseline AUC: 0.70965
+These results represent local cross-validation performance, not a final Kaggle leaderboard score.
 
-These results describe local model evaluation rather than a verified final Kaggle leaderboard score.
+## Tools and Libraries
 
-Tools and Libraries
+- Python
+- NumPy
+- Pandas
+- scikit-learn
+- Logistic Regression
+- StandardScaler
+- OneHotEncoder
+- ROC-AUC
 
-Python
+## Project Structure
 
-pandas
+```text
+Breast-Cancer-Risk-Prediction/
+├── README.md
+├── breast_cancer_model.py
+├── requirements.txt
+└── .gitignore
+```
 
-NumPy
+## Installation
 
-scikit-learn
+Clone the repository:
 
-Logistic Regression
+```bash
+git clone https://github.com/patharesaanvi/Breast-Cancer-Risk-Prediction.git
+cd Breast-Cancer-Risk-Prediction
+```
 
-StandardScaler
+Install the dependencies:
 
-OneHotEncoder
+```bash
+pip install -r requirements.txt
+```
 
-ROC-AUC
+## Running the Model
 
-Project Files
+After obtaining the original competition data and placing `train.csv` and `test.csv` in the locations expected by the script, run:
 
-The Python script contains the model training, preprocessing, evaluation, and prediction workflow.
+```bash
+python breast_cancer_model.py
+```
 
-The original competition data is not included in this repository.
+The script trains the model and generates breast cancer risk predictions for the test dataset.
 
-Future Improvements
+## Future Improvements
 
-Compare logistic regression against additional machine learning models.
-
-Explore feature selection and dimensionality reduction.
-
-Evaluate model generalization across different ancestry groups.
+- Compare logistic regression with other machine learning algorithms.
+- Explore feature selection and dimensionality reduction.
+- Investigate model performance across predicted ancestry groups.
+- Improve model generalization through additional validation experiments.
